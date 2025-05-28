@@ -2,7 +2,7 @@
 	export let classification = {};
 </script>
 
-<div class="rounded border border-gray-200 bg-white p-4 shadow-sm">
+<div class="rounded border border-gray-200 bg-white p-4 mt-2">
 	<h4 class="mb-2 font-semibold">Klasifikasi</h4>
 	<ul class="space-y-1 text-sm text-gray-700">
 		<li><strong>Domain:</strong> {classification.domain}</li>
