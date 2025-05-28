@@ -19,6 +19,9 @@
 		genusInfo: [],
 		speciesInfo: []
 	};
+
+	let family = classification.familyInfo.find((f) => f.familyType === 'Family');
+	let subfamily = classification.familyInfo.find((f) => f.familyType === 'Subfamily');
 </script>
 
 <div class="mt-2 rounded border border-gray-200 bg-white p-4">
@@ -28,26 +31,12 @@
 		<li><strong>Kingdom:</strong> {classification.kingdom}</li>
 		<li><strong>Phylum:</strong> {classification.phylum}</li>
 		<li><strong>Clade:</strong> {classification.clade?.join(', ')}</li>
-		{#if classification.familyInfo.length}
-			{#if classification.familyInfo.find((f) => f.familyType === 'Family') && classification.familyInfo.find((f) => f.familyType === 'Subfamily')}
-				<li>
-					<strong>Family:</strong>
-					{classification.familyInfo.find((f) => f.familyType === 'Family')?.value}
-				</li>
-				<li>
-					<strong>Subfamily:</strong>
-					{classification.familyInfo.find((f) => f.familyType === 'Subfamily')?.value}
-				</li>
-			{:else if classification.familyInfo.find((f) => f.familyType === 'Family')}
-				<li>
-					<strong>Family:</strong>
-					{classification.familyInfo.find((f) => f.familyType === 'Family')?.value}
-				</li>
-			{:else if classification.familyInfo.find((f) => f.familyType === 'Subfamily')}
-				<li>
-					<strong>Subfamily:</strong>
-					{classification.familyInfo.find((f) => f.familyType === 'Subfamily')?.value}
-				</li>
+		{#if family || subfamily}
+			{#if family}
+				<li><strong>Family:</strong> {family.value}</li>
+			{/if}
+			{#if subfamily}
+				<li><strong>Subfamily:</strong> {subfamily.value}</li>
 			{/if}
 		{/if}
 
