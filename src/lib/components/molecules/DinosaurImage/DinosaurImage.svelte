@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+
 	interface DinosaurImage {
 		title: string;
 		description: string;
@@ -55,17 +56,17 @@
 		</div>
 	{/if}
 
-	<div class="bg-gray-100 px-4 py-2">
-		<h3 class="font-semibold dark:text-gray-700">{image.title}</h3>
-		<p class="text-sm text-gray-600">{@html image.description}</p>
-		<p class="mt-2 text-xs dark:text-gray-600">
+	<div class="rounded-b dark:border-r dark:border-b dark:border-gray-400 bg-gray-100 dark:bg-linear-to-tr dark:from-gray-700 dark:to-gray-400 px-4 py-2">
+		<h3 class="font-semibold dark:text-gray-300">{image.title}</h3>
+		<p class="text-sm text-gray-300">{@html image.description}</p>
+		<p class="mt-2 text-xs dark:text-gray-300">
 			By
-			<a href={image.authorURL} target="_blank" class="text-teal-500 hover:underline">
+			<a href={image.authorURL} target="_blank" class="text-teal-500 hover:underline hover:decoration-yellow-500">
 				{image.author}
 			</a>
 			<br />
 			License:
-			<a href={image.licenseURL} target="_blank" class="text-teal-500 hover:underline">
+			<a href={image.licenseURL} target="_blank" class="text-teal-500 hover:underline hover:decoration-yellow-500">
 				{image.license}
 			</a>
 		</p>

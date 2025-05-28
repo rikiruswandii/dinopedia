@@ -99,10 +99,10 @@
 				</button>
 			</div>
 			<div class="hidden lg:flex lg:gap-x-12">
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Home</a>
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Dinosaurs</a>
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Habitats</a>
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">About</a>
+				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Beranda</a>
+				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Dinosaurus</a>
+				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Jelajah</a>
+				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Tentang</a>
 			</div>
 			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 				<div class="flex items-center space-x-2">
