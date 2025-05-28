@@ -58,7 +58,7 @@
 
 	<div class="rounded-b dark:border-r dark:border-b dark:border-gray-400 bg-gray-100 dark:bg-linear-to-tr dark:from-gray-700 dark:to-gray-400 px-4 py-2">
 		<h3 class="font-semibold dark:text-gray-300">{image.title}</h3>
-		<p class="text-sm text-gray-300">{@html image.description}</p>
+		<p class="text-sm text-gray-600 dark:text-gray-300">{@html image.description}</p>
 		<p class="mt-2 text-xs dark:text-gray-300">
 			By
 			<a href={image.authorURL} target="_blank" class="text-teal-500 hover:underline hover:decoration-yellow-500">

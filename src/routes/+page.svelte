@@ -99,10 +99,10 @@
 				</button>
 			</div>
 			<div class="hidden lg:flex lg:gap-x-12">
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Beranda</a>
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Dinosaurus</a>
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Jelajah</a>
-				<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Tentang</a>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Beranda</a>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Dinosaurus</a>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Jelajah</a>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Tentang</a>
 			</div>
 			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 				<div class="flex items-center space-x-2">
@@ -121,8 +121,8 @@
 				class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 			>
 				<div class="flex items-center justify-between">
-					<a href="#" class="-m-1.5 p-1.5">
-						<span class="sr-only">Your Company</span>
+					<a href="/" class="-m-1.5 p-1.5">
+						<span class="sr-only">Dinopedia</span>
 						<img
 							class="h-8 w-auto"
 							src="https://cdn-icons-png.flaticon.com/128/472/472751.png"
@@ -148,24 +148,24 @@
 					<div class="-my-6 divide-y divide-gray-500/10">
 						<div class="space-y-2 py-6">
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
 								>Home</a
 							>
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
 								>Dinosaur</a
 							>
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-								>Habitats</a
+								>Jelajah</a
 							>
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-								>About</a
+								>Tentang</a
 							>
 						</div>
 						<div class="py-6">
@@ -222,7 +222,7 @@
 				</p>
 				<div class="mt-10 flex items-center justify-center gap-x-6">
 					<Button href="/" variant="secondary">Getstart</Button>
-					<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-400"
+					<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-400"
 						>Learn more <span aria-hidden="true">→</span></a
 					>
 				</div>
