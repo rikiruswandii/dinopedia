@@ -6,8 +6,9 @@
 	import { onMount } from 'svelte';
 	import { BarChart, DinosaurList } from '$lib/components/organisms';
 	import { StatisticCard } from '$lib/components/molecules';
+	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 	export let data;
-	console.table(data.data)
+	console.table(data.data);
 
 	onMount(async () => {
 		const { default: ApexCharts } = await import('apexcharts');
@@ -37,7 +38,17 @@
 					'Coelurosauria'
 				]
 			},
-			colors: ['#3B82F6']
+			fill: {
+				type: 'gradient',
+				gradient: {
+					shade: 'light',
+					type: 'diagonal1', // bisa juga coba 'horizontal', 'vertical', 'diagonal1', 'diagonal2'
+					gradientToColors: ['#2DAA9E'], // warna tujuan
+					stops: [0, 100],
+					colorStops: []
+				}
+			},
+			colors: ['#6DE1D2'] // warna awal
 		};
 
 		const chart = new ApexCharts(document.querySelector('#cladeBarChart'), options);
@@ -59,7 +70,7 @@
 					<span class="sr-only">DINOPEDIA</span>
 					<img
 						class="h-8 w-auto"
-						src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+						src="https://cdn-icons-png.flaticon.com/128/472/472751.png"
 						alt=""
 					/>
 				</a>
@@ -114,7 +125,7 @@
 						<span class="sr-only">Your Company</span>
 						<img
 							class="h-8 w-auto"
-							src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+							src="https://cdn-icons-png.flaticon.com/128/472/472751.png"
 							alt=""
 						/>
 					</a>
@@ -160,8 +171,8 @@
 						<div class="py-6">
 							<div class="flex items-center space-x-2">
 								<Switch bind:checked={darkMode} id="dark-mode" />
-								<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
-									{darkMode ? 'Mode Gelap' : 'Mode Terang'}
+								<Label for="dark-mode" class="font-normal text-gray-900">
+									<span class="dark:text-teal-200">{darkMode ? 'Mode Gelap' : 'Mode Terang'}</span>
 								</Label>
 							</div>
 						</div>
@@ -184,7 +195,7 @@
 		<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
 			<div class="hidden sm:mb-8 sm:flex sm:justify-center">
 				<div
-					class="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-teal-400 dark:ring-gray-200/10"
+					class="relative rounded-full px-3 py-1 text-sm/6 text-yellow-500 ring-1 ring-yellow-200 hover:ring-gray-900/20 dark:text-teal-400 dark:ring-yellow-400/10"
 				>
 					Komunitas Pecinta Dinosaurus
 				</div>
@@ -193,19 +204,25 @@
 				<h1
 					class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-teal-200"
 				>
-					Menjelajahi Dunia Dinosaurus dengan Cara Seru dan Interaktif!
+					<span class="underline decoration-teal-400 dark:decoration-green-400">Menjelajahi</span>
+					<span class="underline decoration-yellow-200">Dunia</span>
+					<span class="underline decoration-yellow-500">Dinosaurus</span> dengan Cara Seru dan Interaktif!
 				</h1>
-				<p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-					Kenali ratusan spesies dinosaurus, pelajari sejarahnya, dan temukan fakta menarik yang
-					tidak diajarkan di sekolah. Yuk, mulai petualanganmu di DINOPEDIA!
+				<p
+					class="mt-8 text-lg font-medium text-pretty text-gray-700 sm:text-xl/8 dark:text-gray-500"
+				>
+					Kenali <span class="underline decoration-yellow-200 dark:decoration-yellow-200/50"
+						>ratusan spesies dinosaurus</span
+					>,
+					<span class="underline decoration-yellow-500 dark:decoration-yellow-500/50"
+						>pelajari sejarah</span
+					>nya, dan temukan fakta menarik yang tidak diajarkan di sekolah. Yuk, mulai petualanganmu
+					di
+					<span class="underline decoration-teal-300 dark:decoration-teal-300/50">DINOPEDIA</span>!
 				</p>
 				<div class="mt-10 flex items-center justify-center gap-x-6">
-					<a
-						href="#"
-						class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-						>Get started</a
-					>
-					<a href="#" class="text-sm/6 font-semibold text-gray-900"
+					<Button href="/" variant="secondary">Getstart</Button>
+					<a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-400"
 						>Learn more <span aria-hidden="true">→</span></a
 					>
 				</div>
@@ -223,9 +240,13 @@
 	</div>
 </section>
 
-<section class="bg-white py-12">
+<section class="bg-white py-12 dark:bg-black">
 	<div class="container mx-auto px-20">
-		<h2 class="mb-6 text-2xl font-bold text-gray-800">Statistik Clade Dinosaurus</h2>
+		<h2
+			class="text-chart-5 mb-6 text-4xl font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
+		>
+			Statistik Clade Dinosaurus
+		</h2>
 
 		<!-- Molecule: Statistic Cards -->
 		<StatisticCard />
@@ -238,8 +259,32 @@
 	</div>
 </section>
 
-<section class="bg-white py-12">
-	<DinosaurList dinosaurs={data.data} />
+<section class="bg-white py-12 dark:bg-black">
+	{#if data.data}
+		<div class="container mx-auto px-20">
+			<h2
+				class="text-chart-5 mb-6 text-4xl font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
+			>
+				Dinosaurs
+			</h2>
+			<DinosaurList dinosaurs={data.data} />
+		</div>
+	{:else}
+		<div class="container mx-auto px-4 md:px-10 lg:px-20">
+			<!-- Baris Pertama -->
+			<div class="mb-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				<Skeleton class="h-[100px] w-full rounded-2xl" />
+				<Skeleton class="h-[100px] w-full rounded-2xl" />
+				<Skeleton class="h-[100px] w-full rounded-2xl" />
+			</div>
+
+			<!-- Baris Kedua -->
+			<div class="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
+				<Skeleton class="h-[300px] w-full rounded-2xl lg:col-span-2" />
+				<Skeleton class="h-[300px] w-full rounded-2xl" />
+			</div>
+		</div>
+	{/if}
 </section>
 
 <style>
