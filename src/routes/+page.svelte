@@ -66,7 +66,7 @@
 	<header class="absolute inset-x-0 top-0 z-50">
 		<nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
 			<div class="flex lg:flex-1">
-				<a href="#" class="-m-1.5 p-1.5 text-gray-700 dark:text-gray-200">
+				<a href="/" class="-m-1.5 p-1.5 text-gray-700 dark:text-gray-200">
 					<span class="sr-only">DINOPEDIA</span>
 					<img
 						class="h-8 w-auto"
@@ -107,7 +107,7 @@
 			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 				<div class="flex items-center space-x-2">
 					<Switch bind:checked={darkMode} id="dark-mode" />
-					<Label for="dark-mode">
+					<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
 						{darkMode ? 'Mode Gelap' : 'Mode Terang'}
 					</Label>
 				</div>
@@ -171,8 +171,8 @@
 						<div class="py-6">
 							<div class="flex items-center space-x-2">
 								<Switch bind:checked={darkMode} id="dark-mode" />
-								<Label for="dark-mode" class="font-normal text-gray-900">
-									<span class="dark:text-teal-200">{darkMode ? 'Mode Gelap' : 'Mode Terang'}</span>
+								<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
+									{darkMode ? 'Mode Gelap' : 'Mode Terang'}
 								</Label>
 							</div>
 						</div>
@@ -195,7 +195,7 @@
 		<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
 			<div class="hidden sm:mb-8 sm:flex sm:justify-center">
 				<div
-					class="relative rounded-full px-3 py-1 text-sm/6 text-yellow-500 ring-1 ring-yellow-200 hover:ring-gray-900/20 dark:text-teal-400 dark:ring-yellow-400/10"
+					class="relative rounded-full px-3 py-1 text-sm/6 text-yellow-500 ring-1 ring-yellow-200 hover:ring-yellow-300 dark:text-teal-400 dark:ring-yellow-400/10"
 				>
 					Komunitas Pecinta Dinosaurus
 				</div>

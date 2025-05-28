@@ -3,7 +3,7 @@
 </script>
 
 <div class="rounded border border-gray-200 bg-white p-4 mt-2">
-	<h4 class="mb-2 font-semibold">Klasifikasi</h4>
+	<h4 class="mb-2 font-semibold text-gray-700">Klasifikasi</h4>
 	<ul class="space-y-1 text-sm text-gray-700">
 		<li><strong>Domain:</strong> {classification.domain}</li>
 		<li><strong>Kingdom:</strong> {classification.kingdom}</li>

@@ -36,16 +36,16 @@
 	{/if}
 
 	<div class="bg-gray-100 px-4 py-2">
-		<h3 class="font-semibold">{image.title}</h3>
+		<h3 class="font-semibold dark:text-gray-700">{image.title}</h3>
 		<p class="text-sm text-gray-600">{image.description}</p>
-		<p class="mt-2 text-xs">
+		<p class="mt-2 text-xs dark:text-gray-600">
 			By
-			<a href={image.authorURL} target="_blank" class="text-blue-600 hover:underline">
+			<a href={image.authorURL} target="_blank" class="text-teal-500 hover:underline">
 				{image.author}
 			</a>
 			<br />
 			License:
-			<a href={image.licenseURL} target="_blank" class="text-blue-600 hover:underline">
+			<a href={image.licenseURL} target="_blank" class="text-teal-500 hover:underline">
 				{image.license}
 			</a>
 		</p>
