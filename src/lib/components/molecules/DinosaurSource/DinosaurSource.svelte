@@ -1,5 +1,18 @@
-<script>
-	export let source = {};
+<script lang="ts">
+	interface DinosaurSource {
+		wikipediaURL: string;
+		pageTitle: string;
+		publisher: string;
+		citation: string;
+	}
+
+	// DinosaurList.svelte
+	export let source: DinosaurSource = {
+		wikipediaURL: '',
+		pageTitle: '',
+		publisher: '',
+		citation: ''
+	};
 </script>
 
 <div class="mt-4 text-xs text-gray-500 dark:text-gray-300 italic">
