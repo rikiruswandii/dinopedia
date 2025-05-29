@@ -240,6 +240,19 @@
 	</div>
 </section>
 
+<section class="bg-white py-12 dark:bg-black h-screen">
+	<div class="container mx-auto px-20">
+		<h2
+			class="text-chart-5 mb-6 text-4xl text-center font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
+		>
+			What is Dinopedia?
+		</h2>
+
+		<p class="text-lg text-center font-medium text-pretty text-gray-700 sm:text-xl/8">
+			<span class="font-semibold text-teal-500">Dinopedia</span> <span class="font-semibold text-yellow-500">is</span> a data visualization website that presents various interesting information <span class="font-semibold text-teal-500">about dinosaurs</span> from prehistoric times.
+		</p>
+	</div>
+</section>
 <section class="bg-white py-12 dark:bg-black">
 	<div class="container mx-auto px-20">
 		<h2
@@ -286,7 +299,10 @@
 		</div>
 	{/if}
 </section>
-
+<!-- Footer -->
+<footer class="text-center text-sm text-gray-700 py-6 bg-white">
+    © 2025 Dinopedia. Data berdasarkan Wikipedia.
+  </footer>
 <style>
 	#cladeBarChart {
 		width: 100%;
