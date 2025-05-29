@@ -4,7 +4,7 @@
 	export let dinosaur;
 </script>
 
-<div class="mx-auto mb-8 max-w-4xl rounded bg-white dark:bg-transparent dark:border dark:border-gray-500 p-6 shadow-sm">
+<div class="mx-auto mb-8 max-w-4xl rounded bg-white dark:bg-transparent border border-gray-200 dark:border dark:border-gray-500 p-6 shadow-sm">
 	<h2 class="mb-4 text-2xl font-bold underline decoration-teal-500">{dinosaur.name}</h2>
 	<p class="mb-3 text-gray-600 dark:text-gray-300 italic">{dinosaur.temporalRange}</p>
 	<p class="mb-4">{dinosaur.description}</p>
@@ -15,7 +15,7 @@
     </div>
     <div>
       <p><strong>Diet:</strong> <a href="/" class="hover:underline hover:decoration-yellow-500">{dinosaur.diet}</a> </p>
-      <p><strong>Lokomosi:</strong> <a href="/" class="hover:underline hover:decoration-yellow-500">{dinosaur.locomotionType}</a> </p>
+      <p><strong>Locomotion:</strong> <a href="/" class="hover:underline hover:decoration-yellow-500">{dinosaur.locomotionType}</a> </p>
       <DinosaurClasification classification={dinosaur.classificationInfo} />
     </div>
   </div>

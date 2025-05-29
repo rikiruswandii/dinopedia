@@ -25,7 +25,7 @@
 </script>
 
 <div class="mt-2 rounded border-r border-b border-gray-200 dark:border-gray-400 bg-white dark:bg-linear-to-tl dark:from-gray-700 dark:to-gray-400 p-4">
-	<h4 class="mb-2 font-bold text-gray-800 underline decoration-yellow-500">Klasifikasi</h4>
+	<h4 class="mb-2 font-bold text-gray-800 underline decoration-yellow-500">Classification</h4>
 	<ul class="space-y-1 text-sm text-gray-800">
 		<li><strong>Domain:</strong> <span class="dark:text-gray-300">{classification.domain}</span></li>
 		<li><strong>Kingdom:</strong> <span class="dark:text-gray-300">{classification.kingdom}</span></li>

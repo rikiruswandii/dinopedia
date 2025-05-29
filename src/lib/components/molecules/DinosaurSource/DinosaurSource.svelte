@@ -17,7 +17,7 @@
 
 <div class="mt-4 text-xs text-gray-500 dark:text-gray-300 italic">
 	<p>
-		Sumber: <a href={source.wikipediaURL} target="_blank" class="text-teal-500 hover:underline hover:decoration-yellow-500"
+		Source: <a href={source.wikipediaURL} target="_blank" class="text-teal-500 hover:underline hover:decoration-yellow-500"
 			>{source.pageTitle}</a
 		>
 		— {source.publisher}

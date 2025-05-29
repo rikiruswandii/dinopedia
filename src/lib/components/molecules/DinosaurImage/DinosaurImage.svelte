@@ -52,7 +52,7 @@
 		<img src={directImageURL} alt={image.title} class="h-64 w-full object-contain" />
 	{:else}
 		<div class="flex h-64 w-full items-center justify-center bg-gray-200 text-sm text-gray-500">
-			Memuat gambar...
+			Load image...
 		</div>
 	{/if}
 
