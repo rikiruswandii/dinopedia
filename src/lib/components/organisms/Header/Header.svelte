@@ -7,9 +7,15 @@
 	import { mode, setMode } from 'mode-watcher';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { Icon } from 'svelte-icons-pack';
+	import { HiOutlineSun, HiSolidMoon } from 'svelte-icons-pack/hi';
 
-	let darkMode = mode.current === 'light';
-	$: setMode(darkMode ? 'dark' : 'light');
+	let darkMode = mode.current === 'dark';
+
+	function toggleDarkMode() {
+		darkMode = !darkMode;
+		setMode(darkMode ? 'dark' : 'light');
+	}
 
 	// Scroll Behavior
 	let lastScrollTop = 0;
@@ -45,7 +51,10 @@
 	class="fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-in-out"
 	class:translate-y-[-100%]={hideHeader}
 >
-	<nav class="flex items-center justify-between p-6 lg:px-8 bg-background dark:bg-background rounded-b-full shadow dark:shadow-sm dark:shadow-gray-600" aria-label="Global">
+	<nav
+		class="bg-background dark:bg-background flex items-center justify-between rounded-b-full p-6 shadow lg:px-8 dark:shadow-sm dark:shadow-gray-600"
+		aria-label="Global"
+	>
 		<div class="flex lg:flex-1">
 			<a href="/" class="-m-1.5 p-1.5 text-gray-700 dark:text-gray-200">
 				<span class="sr-only">{appName.toLocaleUpperCase}</span>
@@ -93,10 +102,17 @@
 		</div>
 		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 			<div class="flex items-center space-x-2">
-				<Switch bind:checked={darkMode} id="dark-mode" />
-				<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
-					{darkMode ? m.dark_mode() : m.light_mode()}
-				</Label>
+				<button
+					class="relative h-6 w-6 rounded-full bg-gray-300 !text-yellow-500 transition duration-300 focus:outline-none dark:bg-gray-600 dark:!text-teal-200"
+					on:click={toggleDarkMode}
+					aria-label="switch mode"
+					aria-pressed={darkMode}
+				>
+					<Icon
+						src={darkMode ? HiSolidMoon : HiOutlineSun}
+						size={24}
+					/>
+				</button>
 			</div>
 		</div>
 	</nav>
