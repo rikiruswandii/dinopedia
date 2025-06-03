@@ -45,7 +45,7 @@
 	class="fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-in-out"
 	class:translate-y-[-100%]={hideHeader}
 >
-	<nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+	<nav class="flex items-center justify-between p-6 lg:px-8 bg-background dark:bg-background rounded-b-full shadow dark:shadow-sm dark:shadow-gray-600" aria-label="Global">
 		<div class="flex lg:flex-1">
 			<a href="/" class="-m-1.5 p-1.5 text-gray-700 dark:text-gray-200">
 				<span class="sr-only">{appName.toLocaleUpperCase}</span>
