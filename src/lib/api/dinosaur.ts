@@ -1,4 +1,3 @@
-// src/routes/dinosaurs/+page.ts
 import { PUBLIC_RESTASAURUS_URL } from '$env/static/public';
 
 export async function loadMoreDinos(endpoint: string) {
@@ -11,4 +10,3 @@ export async function loadMoreDinos(endpoint: string) {
 
     return await res.json();
 }
-
