@@ -3,4 +3,5 @@ import { DinosaurCard } from "./DinosaurCard";
 import {DinosaurList} from "./DinosaurList";
 import {Chart} from "./Chart";
 import {Footer} from "./Footer";
-export { BarChart, DinosaurCard, DinosaurList, Chart, Footer }
+import {Header} from "./Header";
+export { BarChart, DinosaurCard, DinosaurList, Chart, Footer,Header }
