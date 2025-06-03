@@ -4,6 +4,6 @@
 	const appName: string = PUBLIC_APP_NAME || 'Dinopedia';
 </script>
 
-<footer class="bg-background dark:bg-background py-6 text-center text-sm text-gray-700 dark:text-gray-300">
+<footer class="bg-background dark:bg-background py-6 text-center text-sm text-gray-700 dark:text-gray-300 rounded-t-full shadow border-t border-solid border-gray-300">
 	{m.footer_text({ name: appName })}
 </footer>
