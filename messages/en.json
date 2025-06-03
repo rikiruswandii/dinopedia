@@ -24,5 +24,8 @@
 	"light_mode": "Light Mode",
 	"nav_about": "About",
 	"nav_explorer": "Explorer",
-	"nav_home": "Home"
+	"nav_home": "Home",
+	"sec_clades_title": "Explore the World of Dinosaurs in Dinopedia",
+	"sec_clades_phar": "Discover fascinating information about ancient creatures from the Jurassic and Cretaceous eras! Dinopedia presents interactive data ranging from dinosaur types, diets, to how they moved.",
+	"sec_clades_choice": "Select one of the categories below to start your exploration!"
 }

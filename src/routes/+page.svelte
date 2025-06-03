@@ -129,15 +129,13 @@
 				<h2
 					class="mb-6 text-center text-4xl font-extrabold tracking-tight text-teal-600 underline decoration-teal-200 md:text-left dark:text-yellow-400 dark:decoration-yellow-600"
 				>
-					Jelajahi Dunia Dinosaurus di Dinopedia
+					{m.sec_clades_title()}
 				</h2>
 				<p class="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-					Temukan berbagai informasi menarik tentang makhluk purba dari era Jurassic dan Cretaceous!
-					Dinopedia menyajikan data interaktif mulai dari jenis dinosaurus, pola makan, hingga cara
-					mereka bergerak.
+					{m.sec_clades_phar()}
 				</p>
 				<p class="text-base text-gray-600 dark:text-gray-400">
-					Pilih salah satu kategori di samping untuk memulai penjelajahanmu!
+					{m.sec_clades_choice()}
 				</p>
 			</div>
 
