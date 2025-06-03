@@ -4,56 +4,33 @@
 	import { Label } from '$lib/components/ui/label';
 	import { mode, setMode } from 'mode-watcher';
 	import { onMount } from 'svelte';
-	import { BarChart, DinosaurList } from '$lib/components/organisms';
+	import { BarChart, DinosaurList, Chart, Footer } from '$lib/components/organisms';
 	import { StatisticCard } from '$lib/components/molecules';
 	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
+	import { m } from '$lib/paraglide/messages.js';
+	import { Shizuka, Suneo, Nobita, Doraemon, Giant, dinoMeme } from '$lib/data/images.js';
+	import { loadMoreDinos } from '$lib/api/dinosaur';
+	import type { imageInfo } from '$lib/types/clades';
+	import { PUBLIC_APP_NAME } from '$env/static/public';
+	const appName: string = PUBLIC_APP_NAME || 'Dinopedia';
 	export let data;
-	console.table(data.data);
 
-	onMount(async () => {
-		const { default: ApexCharts } = await import('apexcharts');
+	const { clades, diets, locomotions } = data;
 
-		const options = {
-			chart: {
-				type: 'bar',
-				height: 280
-			},
-			series: [
-				{
-					name: 'Jumlah Spesies',
-					data: [1173, 754, 447, 374, 339, 331, 326, 323, 291, 286]
-				}
-			],
-			xaxis: {
-				categories: [
-					'Dinosauria',
-					'Saurischia',
-					'Theropoda',
-					'Ornithischia',
-					'Ornithopoda',
-					'Cerapoda',
-					'Sauropodomorpha',
-					'Avetheropoda',
-					'Tetanurae',
-					'Coelurosauria'
-				]
-			},
-			fill: {
-				type: 'gradient',
-				gradient: {
-					shade: 'light',
-					type: 'diagonal1', // bisa juga coba 'horizontal', 'vertical', 'diagonal1', 'diagonal2'
-					gradientToColors: ['#2DAA9E'], // warna tujuan
-					stops: [0, 100],
-					colorStops: []
-				}
-			},
-			colors: ['#6DE1D2'] // warna awal
-		};
+	let loading: boolean = true;
+	let aboutImage: imageInfo = dinoMeme;
+	interface Benefit {
+		label: string;
+		image: imageInfo;
+	}
 
-		const chart = new ApexCharts(document.querySelector('#cladeBarChart'), options);
-		chart.render();
-	});
+	let itsbenefit: Benefit[] = [
+		{ label: 'Clades', image: Giant },
+		{ label: 'Diets', image: Shizuka },
+		{ label: 'Locomotions', image: Suneo },
+		{ label: 'Dinosaurs', image: Nobita },
+		{ label: 'Images', image: Doraemon }
+	];
 
 	// state untuk toggle switch
 	let darkMode = mode.current === 'light';
@@ -62,12 +39,12 @@
 	$: setMode(darkMode ? 'dark' : 'light');
 </script>
 
-<section class="bg-white dark:bg-black">
+<section class="bg-background dark:bg-background">
 	<header class="absolute inset-x-0 top-0 z-50">
 		<nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
 			<div class="flex lg:flex-1">
 				<a href="/" class="-m-1.5 p-1.5 text-gray-700 dark:text-gray-200">
-					<span class="sr-only">DINOPEDIA</span>
+					<span class="sr-only">{appName.toLocaleUpperCase}</span>
 					<img
 						class="h-8 w-auto"
 						src="https://cdn-icons-png.flaticon.com/128/472/472751.png"
@@ -99,16 +76,22 @@
 				</button>
 			</div>
 			<div class="hidden lg:flex lg:gap-x-12">
-				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Beranda</a>
-				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Dinosaurus</a>
-				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Jelajah</a>
-				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">Tentang</a>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200"
+					>{m.nav_home()}</a
+				>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">{m.dino()}</a>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200"
+					>{m.nav_explorer()}</a
+				>
+				<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200"
+					>{m.nav_about()}</a
+				>
 			</div>
 			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 				<div class="flex items-center space-x-2">
 					<Switch bind:checked={darkMode} id="dark-mode" />
 					<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
-						{darkMode ? 'Mode Gelap' : 'Mode Terang'}
+						{darkMode ? m.dark_mode() : m.light_mode()}
 					</Label>
 				</div>
 			</div>
@@ -118,18 +101,18 @@
 			<!-- Background backdrop, show/hide based on slide-over state. -->
 			<div class="fixed inset-0 z-50"></div>
 			<div
-				class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+				class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-black"
 			>
 				<div class="flex items-center justify-between">
 					<a href="/" class="-m-1.5 p-1.5">
-						<span class="sr-only">Dinopedia</span>
+						<span class="sr-only">{appName}</span>
 						<img
 							class="h-8 w-auto"
 							src="https://cdn-icons-png.flaticon.com/128/472/472751.png"
 							alt=""
 						/>
 					</a>
-					<button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+					<button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-400">
 						<span class="sr-only">Close menu</span>
 						<svg
 							class="size-6"
@@ -145,34 +128,34 @@
 					</button>
 				</div>
 				<div class="mt-6 flow-root">
-					<div class="-my-6 divide-y divide-gray-500/10">
+					<div class="-my-6 divide-y divide-gray-500/10 dark:divide-gray-400/10">
 						<div class="space-y-2 py-6">
 							<a
 								href="/"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-								>Home</a
+								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-gray-300"
+								>{m.nav_home()}</a
 							>
 							<a
 								href="/"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-								>Dinosaur</a
+								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-gray-300"
+								>{m.dino()}</a
 							>
 							<a
 								href="/"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-								>Jelajah</a
+								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-gray-300"
+								>{m.nav_explorer()}</a
 							>
 							<a
 								href="/"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-								>Tentang</a
+								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-gray-300"
+								>{m.nav_about()}</a
 							>
 						</div>
 						<div class="py-6">
 							<div class="flex items-center space-x-2">
 								<Switch bind:checked={darkMode} id="dark-mode" />
 								<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
-									{darkMode ? 'Mode Gelap' : 'Mode Terang'}
+									{darkMode ? m.dark_mode() : m.light_mode()}
 								</Label>
 							</div>
 						</div>
@@ -197,33 +180,36 @@
 				<div
 					class="relative rounded-full px-3 py-1 text-sm/6 text-yellow-500 ring-1 ring-yellow-200 hover:ring-yellow-300 dark:text-teal-400 dark:ring-yellow-400/10"
 				>
-					Komunitas Pecinta Dinosaurus
+					{m.community()}
 				</div>
 			</div>
 			<div class="text-center">
 				<h1
 					class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-teal-200"
 				>
-					<span class="underline decoration-teal-400 dark:decoration-green-400">Menjelajahi</span>
-					<span class="underline decoration-yellow-200">Dunia</span>
-					<span class="underline decoration-yellow-500">Dinosaurus</span> dengan Cara Seru dan Interaktif!
+					<span class="underline decoration-teal-400 dark:decoration-green-400"
+						>{m.exploring()}</span
+					>
+					<span class="underline decoration-yellow-200">{m.world()}</span>
+					<span class="underline decoration-yellow-500">{m.dino()}</span>
+					{m.benefits()}
 				</h1>
 				<p
-					class="mt-8 text-lg font-medium text-pretty text-gray-700 sm:text-xl/8 dark:text-gray-500"
+					class="mt-8 text-lg font-medium text-pretty text-gray-700 sm:text-xl/8 dark:text-gray-400"
 				>
-					Kenali <span class="underline decoration-yellow-200 dark:decoration-yellow-200/50"
-						>ratusan spesies dinosaurus</span
+					{m.identify()}
+					<span class="underline decoration-yellow-200 dark:decoration-yellow-200/50"
+						>{m.more_species()}</span
 					>,
 					<span class="underline decoration-yellow-500 dark:decoration-yellow-500/50"
-						>pelajari sejarah</span
-					>nya, dan temukan fakta menarik yang tidak diajarkan di sekolah. Yuk, mulai petualanganmu
-					di
-					<span class="underline decoration-teal-300 dark:decoration-teal-300/50">DINOPEDIA</span>!
+						>{m.history()}</span
+					>{m.fact()}
+					<span class="underline decoration-teal-300 dark:decoration-teal-300/50">{appName}</span>!
 				</p>
 				<div class="mt-10 flex items-center justify-center gap-x-6">
-					<Button href="/" variant="secondary">Getstart</Button>
+					<Button href="/" variant="secondary">{m.getstart()}</Button>
 					<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-400"
-						>Learn more <span aria-hidden="true">→</span></a
+						>{m.learn()} <span aria-hidden="true">→</span></a
 					>
 				</div>
 			</div>
@@ -240,71 +226,117 @@
 	</div>
 </section>
 
-<section class="bg-white py-12 dark:bg-black h-screen">
-	<div class="container mx-auto px-20">
+<section class="bg-background dark:bg-background h-screen py-12">
+	<div class="container px-20 **:mx-auto">
 		<h2
-			class="text-chart-5 mb-6 text-4xl text-center font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
+			class="mb-6 text-center text-4xl font-extrabold tracking-tight text-teal-600 underline decoration-teal-200 dark:text-yellow-400 dark:decoration-yellow-600"
 		>
-			What is Dinopedia?
+			{m.what_is_that({ name: appName })}
 		</h2>
 
-		<p class="text-lg text-center font-medium text-pretty text-gray-700 sm:text-xl/8">
-			<span class="font-semibold text-teal-500">Dinopedia</span> <span class="font-semibold text-yellow-500">is</span> a data visualization website that presents various interesting information <span class="font-semibold text-teal-500">about dinosaurs</span> from prehistoric times.
+		<p
+			class="text-center text-lg font-medium text-pretty text-gray-700 sm:text-xl/8 dark:text-gray-400"
+		>
+			<span class="font-semibold text-teal-500">{appName}</span>
+			<span class="font-semibold text-yellow-500">{m.is()}</span>
+			{m.site_dec_1()} <span class="font-semibold text-teal-500">{m.site_about_dec()}</span>
+			{m.site_dec_2()}
 		</p>
 	</div>
 </section>
-<section class="bg-white py-12 dark:bg-black">
+<section class="bg-background dark:bg-background min-h-screen py-16">
+	<div class="container mx-auto px-6 sm:px-12 lg:px-20">
+		<div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+			<!-- Text Section -->
+			<div>
+				<h2
+					class="mb-6 text-center text-4xl font-extrabold tracking-tight text-teal-600 underline decoration-teal-200 md:text-left dark:text-yellow-400 dark:decoration-yellow-600"
+				>
+					Jelajahi Dunia Dinosaurus di Dinopedia
+				</h2>
+				<p class="mb-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+					Temukan berbagai informasi menarik tentang makhluk purba dari era Jurassic dan Cretaceous!
+					Dinopedia menyajikan data interaktif mulai dari jenis dinosaurus, pola makan, hingga cara
+					mereka bergerak.
+				</p>
+				<p class="text-base text-gray-600 dark:text-gray-400">
+					Pilih salah satu kategori di samping untuk memulai penjelajahanmu!
+				</p>
+			</div>
+
+			<!-- Card Grid Section -->
+			<div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+				{#each itsbenefit as b, index (index)}
+					<a
+						href="/"
+						class="group relative flex h-32 flex-col justify-between rounded-2xl border border-gray-200 bg-white p-4 shadow transition-all duration-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800
+					{index === 3 ? 'sm:col-span-2' : ''}"
+					>
+						<div class="z-10">
+							<span
+								class="text-base font-semibold text-gray-800 transition group-hover:text-teal-600 dark:text-gray-100 dark:group-hover:text-yellow-300"
+							>
+								{b.label}
+							</span>
+						</div>
+						<img
+							src={b.image.src}
+							alt={b.image.alt}
+							title={b.image.title}
+							class="absolute right-2 bottom-2 h-auto w-20 rounded object-contain opacity-80 transition-all duration-300 group-hover:opacity-100"
+						/>
+					</a>
+				{/each}
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="bg-background dark:bg-background py-12">
 	<div class="container mx-auto px-20">
 		<h2
-			class="text-chart-5 mb-6 text-4xl font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
+			class="mb-6 text-center text-4xl font-extrabold tracking-tight text-teal-600 underline decoration-teal-200 md:text-left dark:text-yellow-400 dark:decoration-yellow-600"
 		>
-			Statistik Clade Dinosaurus
+			{m.clade_dino()}
 		</h2>
 
 		<!-- Molecule: Statistic Cards -->
-		<StatisticCard />
 
 		<!-- Organism: Bar Chart Placeholder -->
 		<BarChart>
 			<!-- Chart component will be mounted here -->
-			<div id="cladeBarChart" class="h-72"></div>
+			<Chart clades={clades} diets={diets} locomotions={locomotions} />
 		</BarChart>
 	</div>
 </section>
 
-<section class="bg-white py-12 dark:bg-black">
-	{#if data.data}
-		<div class="container mx-auto px-20">
-			<h2
-				class="text-chart-5 mb-6 text-4xl font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
-			>
-				Dinosaurs
-			</h2>
-			<DinosaurList dinosaurs={data.data} />
-		</div>
-	{:else}
+<!-- <section class="bg-white py-12 dark:bg-black">
+	{#if loading}
 		<div class="container mx-auto px-4 md:px-10 lg:px-20">
-			<!-- Baris Pertama -->
+			
 			<div class="mb-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-				<Skeleton class="h-[100px] w-full rounded-2xl" />
-				<Skeleton class="h-[100px] w-full rounded-2xl" />
-				<Skeleton class="h-[100px] w-full rounded-2xl" />
+				{#each Array(3) as _}
+					<Skeleton class="h-[100px] w-full rounded-2xl" />
+				{/each}
 			</div>
 
-			<!-- Baris Kedua -->
+			
 			<div class="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
 				<Skeleton class="h-[300px] w-full rounded-2xl lg:col-span-2" />
 				<Skeleton class="h-[300px] w-full rounded-2xl" />
 			</div>
 		</div>
+	{:else}
+		<div class="container mx-auto px-20">
+			<h2
+				class="text-chart-5 mb-6 text-4xl font-bold underline decoration-teal-200 dark:text-teal-400 dark:underline dark:decoration-yellow-500"
+			>
+				{m.dino()}
+			</h2>
+			<DinosaurList dinosaurs={data.data} />
+		</div>
 	{/if}
-</section>
+</section> -->
+
 <!-- Footer -->
-<footer class="text-center text-sm text-gray-700 py-6 bg-white">
-    © 2025 Dinopedia. Data berdasarkan Wikipedia.
-  </footer>
-<style>
-	#cladeBarChart {
-		width: 100%;
-	}
-</style>
+<Footer />
