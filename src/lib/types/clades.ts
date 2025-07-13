@@ -1,4 +1,11 @@
 
+export interface DinosaurItem {
+    prevPage: string;
+    currentPage: number;
+    nextPage: string;
+    count: number;
+    data: Array<any>;
+}
 export interface CladeItem {
     clade: string;
     count: number;
