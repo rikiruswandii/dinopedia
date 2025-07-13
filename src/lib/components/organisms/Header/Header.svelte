@@ -92,7 +92,7 @@
 		<div class="hidden lg:flex lg:gap-x-12">
 			<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">{m.nav_home()}</a
 			>
-			<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">{m.dino()}</a>
+			<a href="/dinosaur" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200">{m.dino()}</a>
 			<a href="/" class="text-sm/6 font-semibold text-gray-900 dark:text-teal-200"
 				>{m.nav_explorer()}</a
 			>
@@ -108,10 +108,7 @@
 					aria-label="switch mode"
 					aria-pressed={darkMode}
 				>
-					<Icon
-						src={darkMode ? HiSolidMoon : HiOutlineSun}
-						size={24}
-					/>
+					<Icon src={darkMode ? HiSolidMoon : HiOutlineSun} size={24} />
 				</button>
 			</div>
 		</div>
@@ -177,10 +174,14 @@
 					</div>
 					<div class="py-6">
 						<div class="flex items-center space-x-2">
-							<Switch bind:checked={darkMode} id="dark-mode" />
-							<Label for="dark-mode" class="font-normal text-gray-900 dark:text-teal-200">
-								{darkMode ? m.dark_mode() : m.light_mode()}
-							</Label>
+							<button
+								class="relative h-6 w-6 rounded-full bg-gray-300 !text-yellow-500 transition duration-300 focus:outline-none dark:bg-gray-600 dark:!text-teal-200"
+								on:click={toggleDarkMode}
+								aria-label="switch mode"
+								aria-pressed={darkMode}
+							>
+								<Icon src={darkMode ? HiSolidMoon : HiOutlineSun} size={24} />
+							</button>
 						</div>
 					</div>
 				</div>
