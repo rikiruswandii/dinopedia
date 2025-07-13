@@ -52,11 +52,9 @@
 	});
 </script>
 
-<div class="columns-2 gap-4">
+<div class="grid grid-cols-1 gap-2">
 	{#each dinosaurs.data as dino (dino.id)}
-		<div class="mb-4 break-inside-avoid">
-			<DinosaurCard dinosaur={dino} />
-		</div>
+	<DinosaurCard dinosaur={dino} />
 	{/each}
 </div>
 
